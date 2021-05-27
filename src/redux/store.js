@@ -1,51 +1,58 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { 
+  persistStore, 
+  persistReducer, 
+  // FLUSH,
+  // REHYDRATE,
+  // PAUSE,
+  // PERSIST,
+  // PURGE,
+  // REGISTER, 
+} from 'redux-persist';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import contactReducer from './contactForm/contactForm-reduser';
+import logger from 'redux-logger';
+import storage from 'redux-persist/lib/storage';
 
-const rootReducer = combineReducers({
-    state: contactReducer,
-})
+const persistContactsConfig = {
+  key: 'contacts',
+  storage,
+  blacklist: ['filter'],
+}
+const middleware = [...getDefaultMiddleware({
+  // serializableCheck: {
+  //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+  // }, 
+}), logger]
 
-// const inicialState = {
-//     counter: { 
-//         value: 0, 
-//         step: 5,
-//     }
-// }
+const store = configureStore({
+  reducer: { state: persistReducer(persistContactsConfig, contactReducer) },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
+});
 
-// const reducer = (state = inicialState, {payload, type}) => {
-//     switch (type) {
-//         case 'counter/increment':
-//             return {
-//                 ...state,
-//                counter: {
-//                    ... state.counter,
-//                    value: state.counter.value + payload,
-//                }
-//             }
-        
-//         case 'counter/decrement':
-//             return {
-//                 ...state,
-//                 counter: {
-//                     ...state.counter,
-//                     value: state.counter.value - payload,
-//                 }
-//             };
+const persistor = persistStore(store);
 
-//         default:
-//             return state;
-//     }
-// }
+export default { store, persistor };
 
-const store = createStore(rootReducer, composeWithDevTools(),);
+////////////////////////////////////////////////////////////////////////
+//redux
 
-store.subscribe(()=>{
-    localStorage.setItem('contacts', JSON.stringify(store.getState()))
-  })
+// import { createStore, combineReducers } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import contactReducer from './contactForm/contactForm-reduser';  
+
+// const rootReducer = combineReducers({
+//   state: contactReducer,
+// })
 
 // const persistedState = localStorage.getItem('contacts') 
 //                      ? JSON.parse(localStorage.getItem('contacts'))
-//                      : {}
+//                      : {};
+
+// const store = createStore(rootReducer, persistedState, composeWithDevTools(),);
+
+// store.subscribe(()=>{
+//   localStorage.setItem('contacts', JSON.stringify(store.getState()))
+// })
                      
-export default store;
+// export default store;
