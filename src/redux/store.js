@@ -1,12 +1,12 @@
 import { 
   persistStore, 
   persistReducer, 
-  // FLUSH,
-  // REHYDRATE,
-  // PAUSE,
-  // PERSIST,
-  // PURGE,
-  // REGISTER, 
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER, 
 } from 'redux-persist';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import contactReducer from './contactForm/contactForm-reduser';
@@ -19,9 +19,9 @@ const persistContactsConfig = {
   blacklist: ['filter'],
 }
 const middleware = [...getDefaultMiddleware({
-  // serializableCheck: {
-  //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  // }, 
+  serializableCheck: {
+    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+  }, 
 }), logger]
 
 const store = configureStore({
