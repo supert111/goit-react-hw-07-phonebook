@@ -1,34 +1,19 @@
 import { createAction } from '@reduxjs/toolkit';
-import axios from 'axios';
-// import { response } from 'express';
-// import shortid from 'shortid';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+const addContactRequest = createAction('contacts/addContactRequest');
+const addContactSuccess = createAction('contacts/addContactSuccess');
+const addContactError = createAction('contacts/addContactError');
 
-const addContact = (name, number) => dispatch => {
-    const contact = {name, number};
+// const deleteContact = createAction('contact/Delete');
+// const searchByFilter = createAction('contact/SearchByFilter');
 
-    dispatch({ type: 'contacts/addContactRequest'});
-
-    axios
-        .post('/contacts', contact)
-        .then(({data}) => 
-        dispatch({type: 'contacts/addContactSuccess', payload: data}),
-        )
-        .catch(error => dispatch({type: 'contacts/addContactError', payload: error}))
-}
-
-// const addContact = createAction('contact/Add', ({name, number}) => ({
-//     payload: {
-//         name,
-//         number, 
-//         id: shortid.generate(),
-//     }
-// }));
-const deleteContact = createAction('contact/Delete');
-const searchByFilter = createAction('contact/SearchByFilter');
-
-export default { addContact, deleteContact, searchByFilter };
+export default { 
+    addContactRequest, 
+    addContactSuccess, 
+    addContactError,
+    // deleteContact, 
+    // searchByFilter,
+};
 
 ///////////////////////////////////////////////////////////
 //redux

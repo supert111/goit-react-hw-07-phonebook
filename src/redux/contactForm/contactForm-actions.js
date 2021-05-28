@@ -1,17 +1,17 @@
-import { createAction } from '@reduxjs/toolkit';
-import shortid from 'shortid';
+// import { createAction } from '@reduxjs/toolkit';
+// import shortid from 'shortid';
 
-const addContact = createAction('contact/Add', ({name, number}) => ({
-    payload: {
-        name,
-        number, 
-        id: shortid.generate(),
-    }
-}));
-const deleteContact = createAction('contact/Delete');
-const searchByFilter = createAction('contact/SearchByFilter');
+// const addContact = createAction('contact/Add', ({name, number}) => ({
+//     payload: {
+//         name,
+//         number, 
+//         id: shortid.generate(),
+//     }
+// }));
+// const deleteContact = createAction('contact/Delete');
+// const searchByFilter = createAction('contact/SearchByFilter');
 
-export default { addContact, deleteContact, searchByFilter };
+// export default { addContact, deleteContact, searchByFilter };
 
 ///////////////////////////////////////////////////////////
 //redux
