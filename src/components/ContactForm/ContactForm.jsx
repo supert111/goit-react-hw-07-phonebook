@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import styles from "./ContactForm.module.css";
 import shortid from 'shortid';
-import actions from '../../redux/contactForm/contactForm-actions';
+import actionsOperations from '../../redux/contacts/contacts-operations';
 
 const nameInputId = shortid.generate();
 const phoneInputId = shortid.generate();
@@ -63,7 +63,7 @@ ContactForm.propTypes = {
   };
 
 const mapDispatchToProps = dispatch => ({
-    onSubmit: (name, number) => dispatch(actions.addContact( name, number )),
+    onSubmit: (name, number) => dispatch(actionsOperations.addContact( name, number )),
 })
 
 export default connect(null, mapDispatchToProps)(ContactForm);

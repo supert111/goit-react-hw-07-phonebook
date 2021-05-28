@@ -1,5 +1,5 @@
 import { 
-  persistStore, 
+ // persistStore, 
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -8,7 +8,7 @@ import {
   REGISTER, 
 } from 'redux-persist';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import contactReducer from './contactForm/contactForm-reduser';
+import contactReducer from './contacts/contacts-reducer';
 import logger from 'redux-logger';
 
 
@@ -24,7 +24,7 @@ const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-const persistor = persistStore(store);
+//const persistor = persistStore(store);
 
 export default store;
 
