@@ -16,11 +16,19 @@ const addContact = (name, number) => dispatch => {
         .catch(error => dispatch(actions.addContactError(error)))
 }
 
-// const deleteContact = createAction('contact/Delete');
+const deleteContact = contactId => dispatch => {
+    dispatch(actions.deleteContactRequest());
+
+    axios
+        .delete(`/contacts/${contactId}`)
+        .then(() => dispatch(actions.deleteContactSuccess(contactId)))
+        .catch(error => dispatch(actions.deleteContactError(error)))
+}
+
 // const searchByFilter = createAction('contact/SearchByFilter');
 
 export default { 
     addContact, 
-    // deleteContact, 
+    deleteContact, 
     // searchByFilter, 
 };
