@@ -1,13 +1,22 @@
 import { combineReducers } from "redux";
 import { createReducer } from '@reduxjs/toolkit';
-import actions from '../contactForm/contactForm-actions';
+import {
+    addContactSuccess,
+    addContactRequest,
+    addContactError,
+    deleteContactRequest,
+    deleteContactSuccess,
+    deleteContactError,
+    deleteContact,
+    searchByFilter
+} from '../contactForm/contactForm-actions';
 
 const contacts = createReducer([  
     // {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
     // {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
     // {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     // {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-], { addContactSuccess: (state, { payload }) => {
+], { [addContactSuccess]: (state, { payload }) => {
         const duplicateName = state.find(contact => contact.name.toLowerCase() === payload.name.toLowerCase());
         
         if(duplicateName) {
@@ -27,14 +36,24 @@ const contacts = createReducer([
 
         return [payload, ...state,];
     },
-    [actions.deleteContact]: (state, { payload }) => (state.filter(({id}) => id !== payload)),
+    [deleteContactSuccess]: (state, { payload }) => (state.filter(({id}) => id !== payload)),
+});
+
+const loading = createReducer(false, {
+    [addContactRequest]: () => true,
+    [addContactSuccess]: () => false,
+    [addContactError]: () => false,
+    [deleteContactRequest]: () => true,
+    [deleteContactSuccess]: () => false,
+    [deleteContactError]: () => false,
 });
 
 const filter = createReducer('', {
-    [actions.searchByFilter]: (_, { payload }) => payload,
+    [searchByFilter]: (_, { payload }) => payload,
 })
 
 export default combineReducers({
     contacts,
     filter,
+    loading,
 })
