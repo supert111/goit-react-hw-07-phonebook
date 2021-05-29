@@ -36,6 +36,7 @@ const searchFilter = (allContacts, filter) => {
         );
     };
 
+    //const contactsList = actionsOperations.fetchContacts;
 const mapStateToProps = ({state: {contacts, filter}}) => ({
   phoneBook: searchFilter(contacts, filter),
     })

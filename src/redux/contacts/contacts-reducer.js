@@ -1,22 +1,26 @@
 import { combineReducers } from "redux";
 import { createReducer } from '@reduxjs/toolkit';
 import {
+    fetchContactRequest,
+    fetchContactSuccess,
+    fetchContactError,
     addContactSuccess,
     addContactRequest,
     addContactError,
     deleteContactRequest,
     deleteContactSuccess,
     deleteContactError,
-    deleteContact,
+    //deleteContact,
     searchByFilter
-} from '../contactForm/contactForm-actions';
+} from '../contacts/contacts-actions';
 
 const contacts = createReducer([  
     // {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
     // {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
     // {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     // {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-], { [addContactSuccess]: (state, { payload }) => {
+], {[fetchContactSuccess]:(_, {payload}) => payload, 
+    [addContactSuccess]: (state, { payload }) => {
         const duplicateName = state.find(contact => contact.name.toLowerCase() === payload.name.toLowerCase());
         
         if(duplicateName) {
@@ -40,6 +44,9 @@ const contacts = createReducer([
 });
 
 const loading = createReducer(false, {
+    [fetchContactRequest]: () => true,
+    [fetchContactSuccess]: () => false,
+    [fetchContactError]: () => false,
     [addContactRequest]: () => true,
     [addContactSuccess]: () => false,
     [addContactError]: () => false,
