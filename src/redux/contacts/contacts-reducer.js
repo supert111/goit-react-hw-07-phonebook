@@ -10,7 +10,6 @@ import {
     deleteContactRequest,
     deleteContactSuccess,
     deleteContactError,
-    //deleteContact,
     searchByFilter
 } from '../contacts/contacts-actions';
 
@@ -19,9 +18,9 @@ const contacts = createReducer([
     // {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
     // {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     // {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-], {[fetchContactSuccess]:(_, {payload}) => payload, 
+], {[fetchContactSuccess]:(_, { payload }) => payload, 
     [addContactSuccess]: (state, { payload }) => {
-        const duplicateName = state.find(contact => contact.name.toLowerCase() === payload.name.toLowerCase());
+        const duplicateName = state.find(contact => contact.name === payload.name);
         
         if(duplicateName) {
             alert(`${payload.name} is already in contacts.`);

@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './ContactList.module.css';
-import actionsOperations from '../../redux/contacts/contacts-operations';
+import { deleteContact } from '../../redux/contacts/contacts-operations';
 
 const ContactList = ({ phoneBook, onDeleteContact }) => {
+  
   return (
-    <>
       <ul>
         {phoneBook.map(nameContact => (
           <li className={styles.contact} key={nameContact.id}>{nameContact.name}: {nameContact.number}
@@ -14,7 +14,6 @@ const ContactList = ({ phoneBook, onDeleteContact }) => {
           </li>
         ))}
       </ul>
-    </>
   )
 };
 
@@ -30,19 +29,17 @@ ContactList.propTypes = {
 };
 
 const searchFilter = (allContacts, filter) => {
-  const caseInsensitive = filter.toLocaleLowerCase();
-        return allContacts.filter(contact => 
-            contact.name.toLocaleLowerCase().includes(caseInsensitive)
-        );
-    };
+  const caseInsensitive = filter;
+  return allContacts.filter(contact => 
+    contact.name === caseInsensitive)
+  };
 
-    //const contactsList = actionsOperations.fetchContacts;
 const mapStateToProps = ({state: {contacts, filter}}) => ({
   phoneBook: searchFilter(contacts, filter),
     })
 
 const mapDispatchProps = dispatch => ({
-  onDeleteContact: (id) => dispatch(actionsOperations.deleteContact(id)),
+  onDeleteContact: (id) => dispatch(deleteContact(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchProps)(ContactList);
