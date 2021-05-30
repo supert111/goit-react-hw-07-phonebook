@@ -8,7 +8,7 @@ import styles from "./App.module.css"
 
 class App extends Component { 
     componentDidMount() {
-        this.props.fetchContacts();
+        this.props.fetchContact();
     }
 
     handleFilter = (element) => {
@@ -32,7 +32,7 @@ class App extends Component {
 }
   
   const mapDispatchToProps = dispatch => ({
-    fetchContacts: () => dispatch(fetchContacts()),
+    fetchContact: () => dispatch(fetchContacts()),
   });
 
 export default connect(null, mapDispatchToProps)(App);

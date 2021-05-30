@@ -5,7 +5,7 @@ import styles from './ContactList.module.css';
 import { deleteContact } from '../../redux/contacts/contacts-operations';
 
 const ContactList = ({ phoneBook, onDeleteContact }) => {
-  
+  console.log(phoneBook)
   return (
       <ul>
         {phoneBook.map(nameContact => (
@@ -36,7 +36,7 @@ const searchFilter = (allContacts, filter) => {
 
 const mapStateToProps = ({state: {contacts, filter}}) => ({
   phoneBook: searchFilter(contacts, filter),
-    })
+})
 
 const mapDispatchProps = dispatch => ({
   onDeleteContact: (id) => dispatch(deleteContact(id)),
