@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
 import Filter from "./components/Filter";
+import { fetchContacts } from './redux/contacts/contacts-operations';
 import styles from "./App.module.css"
 
-
 class App extends Component { 
-    state = {
-    };
+    componentDidMount() {
+        this.props.fetchContacts();
+    }
 
     handleFilter = (element) => {
         const { value } = element.target;
@@ -28,4 +30,10 @@ class App extends Component {
         )
     }
 }
-export default App;
+  
+  const mapDispatchToProps = dispatch => ({
+    fetchContacts: () => dispatch(fetchContacts()),
+  });
+
+export default connect(null, mapDispatchToProps)(App);
+//export default App;

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Filter.module.css"
 import { connect } from 'react-redux';
-import actions from '../../redux/contactForm/contactForm-actions';
+import {searchByFilter} from '../../redux/contacts/contacts-actions';
 
 const Filter = ({onChange}) => {
     return (
@@ -19,7 +19,7 @@ const Filter = ({onChange}) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onChange: (e) => dispatch(actions.searchByFilter(e.target.value)),
+    onChange: (e) => dispatch(searchByFilter(e.target.value)),
 })
 
 

@@ -8,7 +8,7 @@ import {
   REGISTER, 
 } from 'redux-persist';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import contactReducer from './contacts/contacts-reducer';
+import contactsReducer from './contacts/contacts-reducer';
 import logger from 'redux-logger';
 
 
@@ -19,7 +19,7 @@ const middleware = [...getDefaultMiddleware({
 }), logger]
 
 const store = configureStore({
-  reducer: { state: contactReducer },
+  reducer: { state: contactsReducer },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
@@ -27,26 +27,3 @@ const store = configureStore({
 //const persistor = persistStore(store);
 
 export default store;
-
-////////////////////////////////////////////////////////////////////////
-//redux
-
-// import { createStore, combineReducers } from 'redux';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import contactReducer from './contactForm/contactForm-reduser';  
-
-// const rootReducer = combineReducers({
-//   state: contactReducer,
-// })
-
-// const persistedState = localStorage.getItem('contacts') 
-//                      ? JSON.parse(localStorage.getItem('contacts'))
-//                      : {};
-
-// const store = createStore(rootReducer, persistedState, composeWithDevTools(),);
-
-// store.subscribe(()=>{
-//   localStorage.setItem('contacts', JSON.stringify(store.getState()))
-// })
-                     
-// export default store;
