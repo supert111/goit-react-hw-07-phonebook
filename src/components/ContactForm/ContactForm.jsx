@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import styles from "./ContactForm.module.css";
 import shortid from 'shortid';
-import { addContact } from '../../redux/contacts/contacts-operations';
+import { addContact } from '../../redux/contacts';
 
 const nameInputId = shortid.generate();
 const phoneInputId = shortid.generate();

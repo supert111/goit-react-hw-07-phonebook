@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Filter.module.css"
 import { connect } from 'react-redux';
-import {searchByFilter} from '../../redux/contacts/contacts-actions';
+import {searchByFilter} from '../../redux/contacts';
 
 const Filter = ({onChange}) => {
     return (
