@@ -7,8 +7,14 @@ import { fetchContacts } from './redux/contacts/contacts-operations';
 import styles from "./App.module.css"
 
 class App extends Component { 
+
+    state = {};
+
     componentDidMount() {
         this.props.fetchContact();
+        console.log(this.props);
+        console.log(this.props.fetchContact);
+        console.log(this.props.fetchContact())
     }
 
     handleFilter = (element) => {
@@ -24,6 +30,7 @@ class App extends Component {
                     <ContactForm /> 
                     <h2>Contacts</h2>
                     <Filter /> 
+                    {this.props.isLoading && <h1>Загружаем...</h1>}
                     <ContactList />
                 </div>
             </div>
@@ -31,9 +38,13 @@ class App extends Component {
     }
 }
   
-  const mapDispatchToProps = dispatch => ({
-    fetchContact: () => dispatch(fetchContacts()),
-  });
+const mapStateToProps = state => ({
+    isLoading: state.loading,
+});
 
-export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = dispatch => ({
+    fetchContact: () => dispatch(fetchContacts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 //export default App;
