@@ -58,7 +58,11 @@ const filter = createReducer('', {
     [searchByFilter]: (_, { payload }) => payload,
 })
 
-const error = createReducer(null, {});
+const error = createReducer(null, {
+    [fetchContactError]: (_, { payload }) => payload,
+    [addContactError]: (_, { payload }) => payload,
+    [deleteContactError]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
     contacts,

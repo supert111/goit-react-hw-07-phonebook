@@ -18,10 +18,9 @@ const Filter = ({onChange}) => {
     )
 }
 
+
 const mapDispatchToProps = dispatch => ({
     onChange: (e) => dispatch(searchByFilter(e.target.value)),
 })
-
-
 
 export default connect(null, mapDispatchToProps)(Filter);
