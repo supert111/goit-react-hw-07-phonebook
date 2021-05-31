@@ -5,7 +5,7 @@ import styles from './ContactList.module.css';
 import { deleteContact } from '../../redux/contacts/contacts-operations';
 
 const ContactList = ({ phoneBook, onDeleteContact }) => {
- // console.log(phoneBook)
+  console.log('phoneBook', phoneBook)
   return (
       <ul>
         {phoneBook.map(nameContact => (
@@ -29,10 +29,11 @@ ContactList.propTypes = {
 };
 
 const searchFilter = (allContacts, filter) => {
-  const caseInsensitive = filter;
-  return allContacts.filter(contact => 
-    contact.name === caseInsensitive)
-  };
+  const caseInsensitive = filter.toLocaleLowerCase();
+    return allContacts.filter(contact => 
+      contact.name.toLocaleLowerCase().includes(caseInsensitive)
+    );
+};
 
 const mapStateToProps = ({state: {contacts, filter}}) => ({
   phoneBook: searchFilter(contacts, filter),
